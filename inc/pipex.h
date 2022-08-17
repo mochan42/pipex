@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/15 18:13:51 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/17 12:27:58 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,19 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
 # include "../get_next_line/get_next_line.h"
 
 /* ########################################################################## */
 /* STRUCTURES */
+
+typedef struct s_prgm
+{
+	int		argc;
+	char	*argv;
+	char	**envp;
+}				t_prgm;
 
 
 /* ########################################################################## */

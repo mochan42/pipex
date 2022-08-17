@@ -6,13 +6,13 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 18:53:51 by mochan            #+#    #+#             */
-/*   Updated: 2022/06/05 17:24:46 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/17 12:16:41 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen_gnl(char *str)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strchr(char *str, int c)
+char	*ft_strchr_gnl(char *str, int c)
 {
 	long int	i;
 
@@ -38,7 +38,7 @@ char	*ft_strchr(char *str, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *string1, char *string2)
+char	*ft_strjoin_gnl(char *string1, char *string2)
 {
 	char		*str;
 	long int	i;
@@ -51,7 +51,7 @@ char	*ft_strjoin(char *string1, char *string2)
 	}
 	if (!string1 || !string2)
 		return (NULL);
-	str = malloc(ft_strlen(string1) + ft_strlen(string2) + 1);
+	str = malloc(ft_strlen_gnl(string1) + ft_strlen_gnl(string2) + 1);
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -80,7 +80,7 @@ char	*new_string(char *string1)
 		free(string1);
 		return (NULL);
 	}
-	str = malloc((ft_strlen(string1) - i + 1) * sizeof(char));
+	str = malloc((ft_strlen_gnl(string1) - i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i++;

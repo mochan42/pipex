@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 18:53:12 by mochan            #+#    #+#             */
-/*   Updated: 2022/06/05 17:24:47 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/17 12:16:55 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 char	*get_next_line(int fd);
 char	*fillstring(int fd, char *string1);
-size_t	ft_strlen(char *str);
-char	*ft_strchr(char *str, int c);
-char	*ft_strjoin(char *string1, char *string2);
+size_t	ft_strlen_gnl(char *str);
+char	*ft_strchr_gnl(char *str, int c);
+char	*ft_strjoin_gnl(char *string1, char *string2);
 char	*output(char *string1);
 char	*new_string(char *string1);
 

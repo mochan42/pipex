@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 18:52:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/11 15:57:49 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/17 12:15:56 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*fillstring(int fd, char *string1)
 	if (!buffer)
 		return (NULL);
 	i = 1;
-	while (!ft_strchr(string1, '\n') && i != 0)
+	while (!ft_strchr_gnl(string1, '\n') && i != 0)
 	{
 		i = read(fd, buffer, BUFFER_SIZE);
 		if (i == -1)
@@ -59,7 +59,7 @@ char	*fillstring(int fd, char *string1)
 			return (NULL);
 		}
 		*(buffer + i) = '\0';
-		string1 = ft_strjoin(string1, buffer);
+		string1 = ft_strjoin_gnl(string1, buffer);
 	}
 	free(buffer);
 	return (string1);
