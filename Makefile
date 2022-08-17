@@ -9,6 +9,9 @@ RM					:= rm -rf
 INCS				:= -I ./inc/
 HEADER				:= ./inc/pipex.h
 
+LIBFT_DIR			:= libft
+LIBFT_A				:= ./libft/libft.a
+
 FT_PRINTF_DIR		:= ft_printf
 FT_PRINTF_A			:= ./ft_printf/ft_printf.a
 
@@ -43,11 +46,13 @@ OBJ					:= $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 all : $(NAME)
 
 $(NAME):  $(OBJ_DIR) $(OBJ)
+	@echo "$(BLUE)make $(LIBFT_DIR)$(END_COLOR)"
+	make -C $(LIBFT_DIR)
 	@echo "$(BLUE)make $(FT_PRINTF_DIR)$(END_COLOR)"
 	make -C $(FT_PRINTF_DIR)
 	@echo "$(BLUE)make $(GET_NEXT_LINE_DIR)$(END_COLOR)"
 	make -C $(GET_NEXT_LINE_DIR)
-	$(CC) $(CFLAGS) $(OBJ) $(FT_PRINTF_A) $(GET_NEXT_LINE_A) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_A) $(FT_PRINTF_A) $(GET_NEXT_LINE_A) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled :)$(END_COLOR)"
 # -C	:	make option that tells make to change directory before execution.
 
@@ -67,17 +72,19 @@ $(OBJ_DIR):
 
 clean: 
 	$(RM) $(OBJ)
+	make clean -C $(LIBFT_DIR)
 	make clean -C $(FT_PRINTF_DIR)
 	make clean -C $(GET_NEXT_LINE_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(OBJ_DIR)
+	make fclean -C $(LIBFT_DIR)
 	make fclean -C $(FT_PRINTF_DIR)
 	make fclean -C $(GET_NEXT_LINE_DIR)
 
 re: fclean all
-	@echo "$(GREEN) Cleaned all and rebuild $(NAME), $(FT_PRINTF_DIR) and $(GET_NEXT_LINE_DIR)!$(END_COLOR)!"
+	@echo "$(GREEN) Cleaned all and rebuild $(NAME), $(LIBFT_DIR) $(FT_PRINTF_DIR) and $(GET_NEXT_LINE_DIR)!$(END_COLOR)!"
 
 .PHONY:		all clean fclean re
 
