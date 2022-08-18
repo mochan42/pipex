@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:27:05 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 18:40:35 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 23:00:06 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*find_path_in_envp(t_prgm vars)
 
 void	split_path(t_prgm *vars, char *s)
 {
-	char	**tab;
 	char	*temp;
+	char	*temp2;
 	int		i;
 
 	if (!s)
@@ -56,15 +56,16 @@ void	split_path(t_prgm *vars, char *s)
 		ft_printf("Error : No string to split.");
 		exit (1);
 	}
-	tab = ft_split(s, ':');
+	vars->env_paths = ft_split(s, ':');
 	i = 0;
-	while (tab[i] != NULL)
+	while (vars->env_paths[i] != NULL)
 	{
-		temp = tab[i];
-		temp = ft_strjoin(temp, "/");
-		tab[i] = temp;
+		temp = vars->env_paths[i];
+		temp2 = ft_strjoin(temp, "/");
+		vars->env_paths[i] = ft_strdup(temp2);
+		free(temp);
+		free(temp2);
 		i++;
 	}
-	vars->env_paths = tab;
 	free(s);
 }

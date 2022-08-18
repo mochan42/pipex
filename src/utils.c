@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:47:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 18:35:54 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:30:33 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void	free_table(char **table)
 		free(table[i]);
 		i++;
 	}
-	free(*table);
+	free(table);
 }

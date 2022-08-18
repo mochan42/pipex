@@ -51,11 +51,19 @@ int	main(int argc, char **argv, char **envp)
 		return (4);
 	if (pid2 == 0)
 		child_process_cmd2(pipx.file2, fd[1], fd[0], &pipx);
-	close(fd[0]);
-	close(fd[1]);
-	close(pipx.file1);
-	close(pipx.file2);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	else
+	{
+		free_table(pipx.cmd_options1);
+		free_table(pipx.cmd_options2);
+		free(pipx.cmd1_path);
+		free(pipx.cmd2_path);
+		free_table(pipx.env_paths);
+		close(fd[0]);
+		close(fd[1]);
+		close(pipx.file1);
+		close(pipx.file2);
+		waitpid(pid1, NULL, 0);
+		waitpid(pid2, NULL, 0);
+	}
 	return (0);
 }
