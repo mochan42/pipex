@@ -1,78 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   main.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:12 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 16:53:05 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 17:05:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
+void	path_and_cmd_preprocessing(t_prgm *vars)
+{
+	char	*str;
+
+	init_path_into_struct(vars);
+	init_cmd_into_struct(vars);
+	str = find_path_in_envp(*vars);
+	split_path(vars, str);
+	split_cmd1(vars);
+	split_cmd2(vars);
+	get_cmd1_path(vars);
+	get_cmd2_path(vars);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_prgm	pipx;
-	char	*str;
-	int		file1;
-	int		file2;
 	int		fd[2];
 	int		pid1;
 	int		pid2;
 
-	if (argc != 5)
-	{
-		ft_printf("Number of arguments is incorrect (need 4 arguments).\n");
-		return (1);
-	}
-	file1 = open("file1", O_RDONLY, 0777);
-	file2 = open("file2", O_WRONLY, 0777);
+	open_files(&pipx);
+	pipx.argc = argc;
 	pipx.argv = argv;
 	pipx.envp = envp;
-	init_path_into_struct(&pipx);
-	init_cmd_into_struct(&pipx);
-	str = find_path_in_envp(pipx);
-	split_path(&pipx, str);
-	split_cmd1(&pipx);
-	split_cmd2(&pipx);
-	get_cmd1_path(&pipx);
-	get_cmd2_path(&pipx);
+	error_number_of_arguments(&pipx);
+	path_and_cmd_preprocessing(&pipx);
 	if (pipe(fd) == -1)
-	{
 		return (2);
-	}
 	pid1 = fork();
 	if (pid1 < 0)
-	{
 		return (3);
-	}
 	if (pid1 == 0)
-	{
-		dup2(file1, STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		execve(pipx.cmd1_path, pipx.cmd_options1, pipx.envp);
-	}
+		child_process_cmd1(pipx.file1, fd[1], fd[0], &pipx);
 	pid2 = fork();
 	if (pid2 < 0)
-	{
 		return (4);
-	}
 	if (pid2 == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		dup2(file2, STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execve(pipx.cmd2_path, pipx.cmd_options2, pipx.envp);
-	}
+		child_process_cmd2(pipx.file2, fd[1], fd[0], &pipx);
 	close(fd[0]);
 	close(fd[1]);
-	close(file1);
-	close(file2);
+	close(pipx.file1);
+	close(pipx.file2);
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 	return (0);

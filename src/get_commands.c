@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:31:21 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 16:49:13 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:36:32 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,46 @@ void	split_cmd2(t_prgm *vars)
 
 	tab = ft_split(vars->cmd2, ' ');
 	vars->cmd_options2 = tab;
+}
+
+char	*get_cmd1_path(t_prgm *vars)
+{
+	int	i;
+
+	i = 0;
+	vars->cmd1_path = NULL;
+	while (vars->env_paths[i] != NULL)
+	{
+		vars->cmd1_path = ft_strjoin(vars->env_paths[i], vars->cmd_options1[0]);
+		if (access(vars->cmd1_path, F_OK | X_OK) == 0)
+		{
+			return (vars->cmd1_path);
+			break ;
+		}
+		free(vars->cmd1_path);
+		i++;
+	}
+	ft_printf("cmd1 not found.\n");
+	return (NULL);
+}
+
+char	*get_cmd2_path(t_prgm *vars)
+{
+	int	i;
+
+	i = 0;
+	vars->cmd2_path = NULL;
+	while (vars->env_paths[i] != NULL)
+	{
+		vars->cmd2_path = ft_strjoin(vars->env_paths[i], vars->cmd_options2[0]);
+		if (access(vars->cmd2_path, F_OK | X_OK) == 0)
+		{
+			return (vars->cmd2_path);
+			break ;
+		}
+		free(vars->cmd2_path);
+		i++;
+	}
+	ft_printf("cmd2 not found.\n");
+	return (NULL);
 }
