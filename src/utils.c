@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:47:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 20:30:33 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 23:18:50 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@ void	free_table(char **table)
 	i = 0;
 	if (!table)
 		exit (1);
-	while(table[i] != NULL)
+	while (table[i] != NULL)
 	{
 		free(table[i]);
 		i++;
 	}
 	free(table);
+}
+
+void	free_stuff(t_prgm *vars)
+{
+	free_table(vars->cmd_options1);
+	free_table(vars->cmd_options2);
+	free(vars->cmd1_path);
+	free(vars->cmd2_path);
+	free_table(vars->env_paths);
 }

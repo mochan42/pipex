@@ -12,10 +12,11 @@
 
 #include "../inc/pipex.h"
 
-void	path_and_cmd_preprocessing(t_prgm *vars)
+void	error_check_and_preprocessing(t_prgm *vars)
 {
 	char	*str;
 
+	error_number_of_arguments(vars);
 	init_path_into_struct(vars);
 	init_cmd_into_struct(vars);
 	str = find_path_in_envp(*vars);
@@ -37,8 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	pipx.argc = argc;
 	pipx.argv = argv;
 	pipx.envp = envp;
-	error_number_of_arguments(&pipx);
-	path_and_cmd_preprocessing(&pipx);
+	error_check_and_preprocessing(&pipx);
 	if (pipe(fd) == -1)
 		return (2);
 	pid1 = fork();
@@ -52,18 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	if (pid2 == 0)
 		child_process_cmd2(pipx.file2, fd[1], fd[0], &pipx);
 	else
-	{
-		free_table(pipx.cmd_options1);
-		free_table(pipx.cmd_options2);
-		free(pipx.cmd1_path);
-		free(pipx.cmd2_path);
-		free_table(pipx.env_paths);
-		close(fd[0]);
-		close(fd[1]);
-		close(pipx.file1);
-		close(pipx.file2);
-		waitpid(pid1, NULL, 0);
-		waitpid(pid2, NULL, 0);
-	}
+		parent_process(pipx, fd, pid1, pid2);
 	return (0);
 }
