@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:12 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 14:32:48 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 15:12:17 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ int main(int argc, char **argv, char **envp)
 		ft_printf("Number of arguments is incorrect (need 4 arguments).\n");
 		return (1);
 	}
+	
+	int	file1;
+	int	file2;
+	
+	file1 = open("file1", O_RDONLY, 0777);
+	file2 = open("file2", O_WRONLY, 0777);
+	
 	pipx.argv = argv;
 	pipx.envp = envp;
 	init_path_into_struct(&pipx);
@@ -54,6 +61,7 @@ int main(int argc, char **argv, char **envp)
 	if (pid1 == 0)
 	{
 		// Child process for cmd1
+		dup2(file1, STDIN_FILENO);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
@@ -71,6 +79,7 @@ int main(int argc, char **argv, char **envp)
 	{
 		// Child process for cmd2
 		dup2(fd[0], STDIN_FILENO);
+		dup2(file2, STDOUT_FILENO);
 		close(fd[1]);
 		close(fd[0]);
 		execve(pipx.cmd2_path, pipx.cmd_options2, pipx.envp);
@@ -78,7 +87,8 @@ int main(int argc, char **argv, char **envp)
 	
 	close(fd[0]);
 	close(fd[1]);
-	
+	close(file1);
+	close(file2);
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:27:05 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 13:46:46 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/18 15:01:55 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*get_cmd2_path(t_prgm *vars)
 		vars->cmd2_path = ft_strjoin(vars->env_paths[i], vars->cmd_options2[0]);
 		if (access(vars->cmd2_path, F_OK | X_OK) == 0)
 		{
-			ft_printf("cmd2 with path is : %s\n", vars->cmd2_path);
+			// ft_printf("cmd2 with path is : %s\n", vars->cmd2_path);
 			return (vars->cmd2_path);
 			break;
 		}
