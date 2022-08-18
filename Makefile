@@ -32,7 +32,7 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	pipex.c
+SRC_FILES			:=	pipex.c get_paths.c get_commands.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 
