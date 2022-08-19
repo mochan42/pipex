@@ -31,27 +31,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_prgm	pipx;
 	int		fd[2];
-	int		pid1;
-	int		pid2;
 
 	open_files(&pipx);
 	pipx.argc = argc;
 	pipx.argv = argv;
 	pipx.envp = envp;
 	error_check_and_preprocessing(&pipx);
-	if (pipe(fd) == -1)
-		return (2);
-	pid1 = fork();
-	if (pid1 < 0)
-		return (3);
-	if (pid1 == 0)
-		child_process_cmd1(pipx.file1, fd[1], fd[0], &pipx);
-	pid2 = fork();
-	if (pid2 < 0)
-		return (4);
-	if (pid2 == 0)
-		child_process_cmd2(pipx.file2, fd[1], fd[0], &pipx);
-	else
-		parent_process(pipx, fd, pid1, pid2);
+	pipe_and_fork(&pipx, fd);
 	return (0);
 }

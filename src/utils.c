@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:47:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 23:18:50 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/19 12:21:14 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	open_files(t_prgm *vars)
 {
 	vars->file1 = open("file1", O_RDONLY, 0777);
-	vars->file2 = open("file2", O_WRONLY, 0777);
+	vars->file2 = open("file2", O_WRONLY | O_CREAT, 0777);
 }
 
 void	free_table(char **table)

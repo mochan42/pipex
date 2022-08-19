@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent_process.c                                   :+:      :+:    :+:   */
+/*   piping_n_forking.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 23:06:06 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/19 12:40:24 by mochan           ###   ########.fr       */
+/*   Created: 2022/08/19 12:24:31 by mochan            #+#    #+#             */
+/*   Updated: 2022/08/19 12:41:05 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-int	parent_process(t_prgm vars, int *fildes, int chi1, int chi2)
+int	pipe_and_fork(t_prgm *vars, int *fildes)
 {
-	free_stuff(&vars);
-	close(fildes[0]);
-	close(fildes[1]);
-	close(vars.file1);
-	close(vars.file2);
-	waitpid(chi1, NULL, 0);
-	waitpid(chi2, NULL, 0);
+	int		pid1;
+	int		pid2;
+
+	if (pipe(fildes) == -1)
+		return (2);
+	pid1 = fork();
+	if (pid1 < 0)
+		return (3);
+	if (pid1 == 0)
+		child_process_cmd1(vars->file1, fildes, vars);
+	pid2 = fork();
+	if (pid2 < 0)
+		return (4);
+	if (pid2 == 0)
+		child_process_cmd2(vars->file2, fildes, vars);
+	else
+		parent_process(*vars, fildes, pid1, pid2);
 	return (0);
 }
