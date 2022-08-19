@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/19 12:40:44 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 00:24:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ typedef struct s_prgm
 	char	*cmd2;
 	char	*path_file1;
 	char	*path_file2;
+	char	*path_file2_wo_cmd;
 	char	*cmd1_path;
 	char	*cmd2_path;
 	char	**cmd_options1;
 	char	**cmd_options2;
+	int		b_path_cmd1_nok;
+	int		b_path_cmd2_nok;
 }				t_prgm;
 
 /* ########################################################################## */
@@ -53,19 +56,24 @@ typedef struct s_prgm
 /* ########################################################################## */
 /* FUNCTIONS */
 
-/* error_arguments.c */
+/* errors_1.c */
 void	error_number_of_arguments(t_prgm *vars);
+void	check_path_file1(t_prgm *vars);
+void	check_path_file2(t_prgm *vars);
+void	check_both_paths(t_prgm *vars);
 
 /* child_processes.c */
 void	child_process_cmd1(int infile, int *fildes, t_prgm *vars);
 void	child_process_cmd2(int outfile, int *fildes, t_prgm *vars);
 
 /* piping_n_forking.c */
+int		error_msg_failed_pipe(int n);
+int		error_msg_fork_child1_failed(int n);
+int		error_msg_fork_child2_failed(int n);
 int		pipe_and_fork(t_prgm *vars, int *fildes);
 
 /* get_paths.c */
 char	*find_path_in_envp(t_prgm vars);
-void	init_path_into_struct(t_prgm *vars);
 void	split_path(t_prgm *vars, char *s);
 
 /* get_commands.c */

@@ -6,17 +6,11 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:27:05 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/18 23:00:06 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/19 15:12:05 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
-
-void	init_path_into_struct(t_prgm *vars)
-{
-	vars->path_file1 = vars->argv[1];
-	vars->path_file2 = vars->argv[4];
-}
 
 char	*find_path_in_envp(t_prgm vars)
 {

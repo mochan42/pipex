@@ -32,7 +32,7 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	main.c get_paths.c get_commands.c error_arguments.c\
+SRC_FILES			:=	main.c get_paths.c get_commands.c errors_1.c\
 						child_processes.c utils.c parent_process.c\
 						piping_n_forking.c
 
