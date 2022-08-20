@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 18:35:56 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 19:56:21 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_prgm
 	char	*cmd2;
 	char	*path_file1;
 	char	*path_file2;
-	char	*path_file2_without_cmd2;
+	char	*path_file2_short;
 	char	*cmd1_path;
 	char	*cmd2_path;
 	char	**cmd_options1;
@@ -72,6 +72,9 @@ void	check_both_paths(t_prgm *vars);
 void	error_number_of_arguments(t_prgm *vars);
 void	check_both_cmds(t_prgm *vars);
 
+/* errors_3.c */
+void	exit_if_failed_malloc_path_file2_short(char *s);
+
 /* check_existence_permission_files.c */
 int		check_existence_file1(t_prgm *vars);
 int		check_r_right_file1(t_prgm *vars);
@@ -81,6 +84,11 @@ void	check_existence_permissions_both_files(t_prgm *vars);
 /* child_processes.c */
 void	child_process_cmd1(int infile, int *fildes, t_prgm *vars);
 void	child_process_cmd2(int outfile, int *fildes, t_prgm *vars);
+
+/* open_files.c */
+void	open_file1(t_prgm *vars);
+void	open_file2(t_prgm *vars);
+void	open_both_files(t_prgm *vars);
 
 /* piping_n_forking.c */
 int		error_msg_failed_pipe(int n);
@@ -103,10 +111,8 @@ void	split_cmd2(t_prgm *vars);
 int		parent_process(t_prgm vars, int *fildes, int chi1, int chi2);
 
 /* utils.c */
-void	open_file1(t_prgm *vars);
-void	open_file2(t_prgm *vars);
-void	open_both_files(t_prgm *vars);
 void	free_table(char **table);
 void	free_stuff(t_prgm *vars);
+void	copy_path_to_struct(t_prgm *vars, int n);
 
 #endif
