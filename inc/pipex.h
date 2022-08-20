@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 00:24:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 13:14:07 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ typedef struct s_prgm
 	char	*cmd2_path;
 	char	**cmd_options1;
 	char	**cmd_options2;
-	int		b_path_cmd1_nok;
-	int		b_path_cmd2_nok;
+	int		b_path_file1_nok;
+	int		b_path_file2_nok;
+	int		b_cmd1_nok;
+	int		b_cmd2_nok;
 }				t_prgm;
 
 /* ########################################################################## */
@@ -61,6 +63,7 @@ void	error_number_of_arguments(t_prgm *vars);
 void	check_path_file1(t_prgm *vars);
 void	check_path_file2(t_prgm *vars);
 void	check_both_paths(t_prgm *vars);
+void	check_both_cmds(t_prgm *vars);
 
 /* child_processes.c */
 void	child_process_cmd1(int infile, int *fildes, t_prgm *vars);
@@ -76,7 +79,7 @@ int		pipe_and_fork(t_prgm *vars, int *fildes);
 char	*find_path_in_envp(t_prgm vars);
 void	split_path(t_prgm *vars, char *s);
 
-/* get_commands.c */
+/* get_commands_1.c */
 void	init_cmd_into_struct(t_prgm *vars);
 char	*get_cmd1_path(t_prgm *vars);
 char	*get_cmd2_path(t_prgm *vars);

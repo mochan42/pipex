@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commands.c                                     :+:      :+:    :+:   */
+/*   get_commands_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:31:21 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/19 14:32:29 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 00:41:59 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,18 @@ char	*get_cmd1_path(t_prgm *vars)
 		vars->cmd1_path = ft_strjoin(vars->env_paths[i], vars->cmd_options1[0]);
 		if (access(vars->cmd1_path, F_OK | X_OK) == 0)
 		{
+			vars->b_cmd1_nok = 0;
 			return (vars->cmd1_path);
 			break ;
 		}
 		free(vars->cmd1_path);
 		i++;
 	}
-	free_table(vars->env_paths);
-	free_table(vars->cmd_options1);
-	ft_printf("cmd1 not found.\n");
-	exit (1);
+	vars->b_cmd1_nok = 1;
+	// free_table(vars->env_paths);
+	// free_table(vars->cmd_options1);
+	// ft_printf("command not found: \n");
+	// exit (1);
 	return (NULL);
 }
 
@@ -69,15 +71,19 @@ char	*get_cmd2_path(t_prgm *vars)
 		vars->cmd2_path = ft_strjoin(vars->env_paths[i], vars->cmd_options2[0]);
 		if (access(vars->cmd2_path, F_OK | X_OK) == 0)
 		{
+			vars->b_cmd2_nok = 0;
 			return (vars->cmd2_path);
 			break ;
 		}
 		free(vars->cmd2_path);
 		i++;
 	}
+	vars->b_cmd2_nok = 1;
 	free_table(vars->env_paths);
 	free_table(vars->cmd_options2);
-	ft_printf("cmd2 not found.\n");
+	ft_printf("command not found: \n");
 	exit (1);
 	return (NULL);
 }
+
+

@@ -23,8 +23,9 @@ void	error_check_and_preprocessing(t_prgm *vars)
 	split_path(vars, str);
 	split_cmd1(vars);
 	split_cmd2(vars);
-	get_cmd1_path(vars);
-	get_cmd2_path(vars);
+	// get_cmd1_path(vars);
+	// get_cmd2_path(vars);
+	check_both_cmds(vars);
 }
 
 int	main(int argc, char **argv, char **envp)
