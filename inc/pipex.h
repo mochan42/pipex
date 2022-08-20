@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 16:45:42 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 17:41:08 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_prgm
 	int		b_path_file2_nok;
 	int		b_cmd1_nok;
 	int		b_cmd2_nok;
-	int		b_permission_file1_nok;
-	int		b_permission_file2_nok;
+	int		b_opening_file1_nok;
+	int		b_opening_file2_nok;
 }				t_prgm;
 
 /* ########################################################################## */
