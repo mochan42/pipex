@@ -35,7 +35,7 @@ END_COLOR			:= \033[0;39m
 SRC_FILES			:=	main.c get_paths.c get_commands_1.c \
 						utils.c errors_1.c errors_2.c\
 						child_processes.c parent_process.c\
-						piping_n_forking.c
+						piping_n_forking.c check_existence_permission_files.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 

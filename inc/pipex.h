@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 17:41:08 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 18:35:56 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_prgm
 	int		b_cmd2_nok;
 	int		b_opening_file1_nok;
 	int		b_opening_file2_nok;
+	int		b_accessing_file1_nok;
+	int		b_accessing_file2_nok;
 }				t_prgm;
 
 /* ########################################################################## */
@@ -69,6 +71,12 @@ void	check_both_paths(t_prgm *vars);
 /* errors_2.c */
 void	error_number_of_arguments(t_prgm *vars);
 void	check_both_cmds(t_prgm *vars);
+
+/* check_existence_permission_files.c */
+int		check_existence_file1(t_prgm *vars);
+int		check_r_right_file1(t_prgm *vars);
+int		check_w_right_file2(t_prgm *vars);
+void	check_existence_permissions_both_files(t_prgm *vars);
 
 /* child_processes.c */
 void	child_process_cmd1(int infile, int *fildes, t_prgm *vars);
