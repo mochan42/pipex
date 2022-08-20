@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	pipx.argc = argc;
 	pipx.argv = argv;
 	pipx.envp = envp;
-	open_files(&pipx);
+	open_both_files(&pipx);
 	error_check_and_preprocessing(&pipx);
 	pipe_and_fork(&pipx, fd);
 	return (0);

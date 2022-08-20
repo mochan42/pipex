@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 13:14:07 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 16:45:42 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_prgm
 	char	*cmd2;
 	char	*path_file1;
 	char	*path_file2;
-	char	*path_file2_wo_cmd;
+	char	*path_file2_without_cmd2;
 	char	*cmd1_path;
 	char	*cmd2_path;
 	char	**cmd_options1;
@@ -50,6 +50,8 @@ typedef struct s_prgm
 	int		b_path_file2_nok;
 	int		b_cmd1_nok;
 	int		b_cmd2_nok;
+	int		b_permission_file1_nok;
+	int		b_permission_file2_nok;
 }				t_prgm;
 
 /* ########################################################################## */
@@ -59,10 +61,13 @@ typedef struct s_prgm
 /* FUNCTIONS */
 
 /* errors_1.c */
-void	error_number_of_arguments(t_prgm *vars);
 void	check_path_file1(t_prgm *vars);
+char	*extract_path_file2_wo_cmd(t_prgm *vars);
 void	check_path_file2(t_prgm *vars);
 void	check_both_paths(t_prgm *vars);
+
+/* errors_2.c */
+void	error_number_of_arguments(t_prgm *vars);
 void	check_both_cmds(t_prgm *vars);
 
 /* child_processes.c */
@@ -90,7 +95,9 @@ void	split_cmd2(t_prgm *vars);
 int		parent_process(t_prgm vars, int *fildes, int chi1, int chi2);
 
 /* utils.c */
-void	open_files(t_prgm *vars);
+void	open_file1(t_prgm *vars);
+void	open_file2(t_prgm *vars);
+void	open_both_files(t_prgm *vars);
 void	free_table(char **table);
 void	free_stuff(t_prgm *vars);
 

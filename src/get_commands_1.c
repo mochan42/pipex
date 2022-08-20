@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:31:21 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 13:24:38 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/20 16:52:14 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,5 @@ char	*get_cmd2_path(t_prgm *vars)
 		i++;
 	}
 	vars->b_cmd2_nok = 1;
-	free_table(vars->env_paths);
-	free_table(vars->cmd_options2);
-	ft_printf("command not found: \n");
-	exit (1);
 	return (NULL);
 }

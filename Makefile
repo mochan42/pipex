@@ -32,8 +32,9 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	main.c get_paths.c get_commands_1.c errors_1.c\
-						child_processes.c utils.c parent_process.c\
+SRC_FILES			:=	main.c get_paths.c get_commands_1.c \
+						utils.c errors_1.c errors_2.c\
+						child_processes.c parent_process.c\
 						piping_n_forking.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
@@ -86,7 +87,7 @@ fclean: clean
 	make fclean -C $(GET_NEXT_LINE_DIR)
 
 re: fclean all
-	@echo "$(GREEN) Cleaned all and rebuild $(NAME), $(LIBFT_DIR) $(FT_PRINTF_DIR) and $(GET_NEXT_LINE_DIR)!$(END_COLOR)!"
+	@echo "$(GREEN) Cleaned all and rebuild $(NAME), $(LIBFT_DIR) $(FT_PRINTF_DIR) and $(GET_NEXT_LINE_DIR)!$(END_COLOR)"
 
 .PHONY:		all clean fclean re
 
