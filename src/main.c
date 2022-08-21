@@ -27,14 +27,15 @@ void	init_struct(t_prgm *vars)
 	vars->cmd2_path = NULL;
 	vars->cmd_options1 = NULL;
 	vars->cmd_options2 = NULL;
-	vars->b_path_file1_nok = 0;
-	vars->b_path_file2_nok = 0;
 	vars->b_cmd1_nok = 0;
 	vars->b_cmd2_nok = 0;
-	vars->b_opening_file1_nok = 0;
-	vars->b_opening_file2_nok = 0;
-	vars->b_accessing_file1_nok = 0;
-	vars->b_accessing_file2_nok = 0;
+	vars->err_file1_existence_nok = 0;
+	vars->err_file2_existence_nok = 0;
+	vars->err_file1_path_access_nok = 0;
+	vars->err_file2_path_access_nok = 0;
+	vars->err_cmd1_nok = 0;
+	vars->err_file2_w_right_nok = 0;
+	vars->err_cmd2_nok = 0;
 }
 
 void	error_check_and_preprocessing(t_prgm *vars)
@@ -42,14 +43,17 @@ void	error_check_and_preprocessing(t_prgm *vars)
 	char	*str;
 
 	error_number_of_arguments(vars);
-	check_both_paths(vars);
 	str = find_path_in_envp(*vars);
 	split_path(vars, str);
 	init_argv_2_3_into_struct(vars);
 	init_cmd1_into_struct(vars);
-	// split_cmd2(vars);
 	init_cmd2_into_struct(vars);
 	check_both_cmds(vars);
+	check_path_file1(vars);
+	check_path_file2(vars);
+	priorization_error_code_1st_half_pipe(vars);
+	priorization_error_code_2nd_half_pipe(vars);
+	error_exit(vars);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -61,7 +65,6 @@ int	main(int argc, char **argv, char **envp)
 	pipx.argv = argv;
 	pipx.envp = envp;
 	init_struct(&pipx);
-	check_existence_permissions_both_files(&pipx);
 	open_both_files(&pipx);
 	error_check_and_preprocessing(&pipx);
 	pipe_and_fork(&pipx, fd);

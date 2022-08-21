@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:31:21 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 18:22:47 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 21:48:27 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ char	*get_cmd1_path(t_prgm *vars)
 		vars->cmd1_path = ft_strjoin(vars->env_paths[i], vars->cmd_options1[0]);
 		if (access(vars->cmd1_path, X_OK) == 0)
 		{
-			vars->b_cmd1_nok = 0;
+			vars->err_cmd1_nok = 0;
 			return (vars->cmd1_path);
 			break ;
 		}
 		free(vars->cmd1_path);
 		i++;
 	}
-	vars->b_cmd1_nok = 1;
+	vars->err_cmd1_nok = 10;
 	return (NULL);
 }
 
@@ -72,9 +72,9 @@ void	init_cmd1_into_struct(t_prgm *vars)
 	{
 		init_cmd1_into_struct_helper(vars);
 		if (access(vars->cmd1, F_OK | X_OK) == 0)
-			vars->b_cmd1_nok = 0;
+			vars->err_cmd1_nok = 0;
 		else if (access(vars->cmd1, F_OK | X_OK) != 0)
-			vars->b_cmd1_nok = 1;
+			vars->err_cmd1_nok = 10;
 	}
 	else
 		get_cmd1_path(vars);

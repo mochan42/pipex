@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 18:49:20 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 23:34:04 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ typedef struct s_prgm
 	char	*cmd2_path;
 	char	**cmd_options1;
 	char	**cmd_options2;
-	int		b_path_file1_nok;
-	int		b_path_file2_nok;
 	int		b_cmd1_nok;
 	int		b_cmd2_nok;
-	int		b_opening_file1_nok;
-	int		b_opening_file2_nok;
-	int		b_accessing_file1_nok;
-	int		b_accessing_file2_nok;
+	int		err_file1_existence_nok;
+	int		err_file2_existence_nok;
+	int		err_file1_r_right_nok;
+	int		err_file2_w_right_nok;
+	int		err_file1_path_access_nok;
+	int		err_file2_path_access_nok;
+	int		err_cmd1_nok;
+	int		err_cmd2_nok;
+	int		err_1st_half_pipe;
+	int		err_2nd_half_pipe;
 }				t_prgm;
 
 /* ########################################################################## */
@@ -66,7 +70,6 @@ typedef struct s_prgm
 void	check_path_file1(t_prgm *vars);
 char	*extract_path_file2_wo_cmd(t_prgm *vars);
 void	check_path_file2(t_prgm *vars);
-void	check_both_paths(t_prgm *vars);
 
 /* errors_2.c */
 void	error_number_of_arguments(t_prgm *vars);
@@ -75,11 +78,18 @@ void	check_both_cmds(t_prgm *vars);
 /* errors_3.c */
 void	exit_if_failed_malloc_path_file2_short(char *s);
 
+/* error_management.c */
+void	sum_error_codes_1st_half_pipe(t_prgm *vars);
+void	sum_error_codes_2nd_half_pipe(t_prgm *vars);
+void	priorization_error_code_1st_half_pipe(t_prgm *vars);
+void	priorization_error_code_2nd_half_pipe(t_prgm *vars);
+void	error_exit(t_prgm *vars);
+
 /* check_existence_permission_files.c */
-int		check_existence_file1(t_prgm *vars);
-int		check_r_right_file1(t_prgm *vars);
-int		check_w_right_file2(t_prgm *vars);
-void	check_existence_permissions_both_files(t_prgm *vars);
+void	check_existence_file1(t_prgm *vars);
+void	check_existence_file2(t_prgm *vars);
+void	check_r_right_file1(t_prgm *vars);
+void	check_w_right_file2(t_prgm *vars);
 
 /* child_processes.c */
 void	child_process_cmd1(int infile, int *fildes, t_prgm *vars);
@@ -107,7 +117,6 @@ void	init_cmd1_into_struct(t_prgm *vars);
 void	init_cmd1_into_struct_helper(t_prgm *vars);
 
 /* get_commands_2.c */
-// void	split_cmd2(t_prgm *vars);
 char	*get_cmd2_path(t_prgm *vars);
 void	init_cmd2_into_struct_helper(t_prgm *vars);
 void	init_cmd2_into_struct(t_prgm *vars);

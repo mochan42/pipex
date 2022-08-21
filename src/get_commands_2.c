@@ -6,24 +6,16 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 12:44:15 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 18:48:19 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 21:51:17 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-// void	split_cmd2(t_prgm *vars)
-// {
-// 	char	**tab;
-
-// 	tab = ft_split(vars->cmd2, ' ');
-// 	vars->cmd_options2 = tab;
-// }
-
 char	*get_cmd2_path(t_prgm *vars)
 {
 	char	**tab;
-	int	i;
+	int		i;
 
 	i = 0;
 	tab = ft_split(vars->cmd2, ' ');
@@ -34,14 +26,14 @@ char	*get_cmd2_path(t_prgm *vars)
 		vars->cmd2_path = ft_strjoin(vars->env_paths[i], vars->cmd_options2[0]);
 		if (access(vars->cmd2_path, X_OK) == 0)
 		{
-			vars->b_cmd2_nok = 0;
+			vars->err_cmd2_nok = 0;
 			return (vars->cmd2_path);
 			break ;
 		}
 		free(vars->cmd2_path);
 		i++;
 	}
-	vars->b_cmd2_nok = 1;
+	vars->err_cmd2_nok = 10;
 	return (NULL);
 }
 
@@ -74,9 +66,9 @@ void	init_cmd2_into_struct(t_prgm *vars)
 	{
 		init_cmd2_into_struct_helper(vars);
 		if (access(vars->cmd2, F_OK | X_OK) == 0)
-			vars->b_cmd2_nok = 0;
+			vars->err_cmd2_nok = 0;
 		else if (access(vars->cmd2, F_OK | X_OK) != 0)
-			vars->b_cmd2_nok = 1;
+			vars->err_cmd2_nok = 10;
 	}
 	else
 		get_cmd2_path(vars);

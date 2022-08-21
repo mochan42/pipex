@@ -34,7 +34,7 @@ END_COLOR			:= \033[0;39m
 
 SRC_FILES			:=	main.c get_paths.c get_commands_1.c get_commands_2.c\
 						open_files.c utils.c\
-						errors_1.c errors_2.c errors_3.c\
+						errors_1.c errors_2.c errors_3.c error_management.c\
 						child_processes.c parent_process.c\
 						piping_n_forking.c check_existence_permission_files.c
 

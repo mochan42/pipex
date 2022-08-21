@@ -15,9 +15,9 @@
 void	check_path_file1(t_prgm *vars)
 {
 	if (access(vars->path_file1, F_OK | X_OK) != 0)
-		vars->b_path_file1_nok = 1;
+		vars->err_file1_path_access_nok = 100;
 	else
-		vars->b_path_file1_nok = 0;
+		vars->err_file1_path_access_nok = 0;
 }
 
 char	*extract_path_file2_wo_cmd(t_prgm *vars)
@@ -47,30 +47,8 @@ void	check_path_file2(t_prgm *vars)
 	{
 		str = extract_path_file2_wo_cmd(vars);
 		if (access(vars->path_file2_short, F_OK | X_OK) != 0)
-			vars->b_path_file2_nok = 1;
+			vars->err_file2_path_access_nok = 100;
 		else
-			vars->b_path_file2_nok = 0;
-	}
-}
-
-void	check_both_paths(t_prgm *vars)
-{
-	check_path_file1(vars);
-	check_path_file2(vars);
-	if (vars->b_path_file2_nok == 1 && vars->b_path_file1_nok == 1)
-	{
-		ft_printf("No such file or directory: %s\n", vars->path_file1);
-		ft_printf("No such file or directory: %s\n", vars->path_file2_short);
-		exit (1);
-	}
-	else if (vars->b_path_file2_nok == 0 && vars->b_path_file1_nok == 1)
-	{
-		ft_printf("No such file or directory: %s\n", vars->path_file1);
-		exit (1);
-	}
-	else if (vars->b_path_file2_nok == 1 && vars->b_path_file1_nok == 0)
-	{
-		ft_printf("No such file or directory: %s\n", vars->path_file2_short);
-		exit (1);
+			vars->err_file2_path_access_nok = 0;
 	}
 }
