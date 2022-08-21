@@ -21,7 +21,7 @@ void	error_check_and_preprocessing(t_prgm *vars)
 	init_cmd_into_struct(vars);
 	str = find_path_in_envp(*vars);
 	split_path(vars, str);
-	split_cmd1(vars);
+	// split_cmd1(vars);
 	split_cmd2(vars);
 	check_both_cmds(vars);
 }

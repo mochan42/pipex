@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:31:21 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 16:52:14 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 10:21:59 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,31 @@ void	init_cmd_into_struct(t_prgm *vars)
 {
 	vars->cmd1 = vars->argv[2];
 	vars->cmd2 = vars->argv[3];
+	if(ft_strchr(vars->cmd1, '/'))
+	{
+		if (access(vars->cmd1, F_OK | X_OK) == 0)
+		{
+			vars->cmd1_path = vars->cmd1;
+			split_cmd1_method2(vars);
+			vars->b_cmd1_nok = 0;
+		}
+		vars->b_cmd1_nok = 1;
+	}
+	else
+		split_cmd1(vars);
+}
+
+void	split_cmd1_method2(t_prgm *vars)
+{
+	char	**temp;
+	char	*cmd_path_full;
+	
+	temp = ft_split(vars->cmd1_path, ' ');
+	cmd_path_full = malloc(sizeof(char) * ft_strlen(temp[0]) + 1);
+	cmd_path_full = temp[0];
+	cmd_path_full[ft_strlen(temp[0]) + 1] = '\0';
+	temp[0] = copy_cmd_name_only(cmd_path_full);
+	vars->cmd_options1 = temp;
 }
 
 void	split_cmd1(t_prgm *vars)

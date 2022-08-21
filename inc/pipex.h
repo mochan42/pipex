@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 19:56:21 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 09:35:57 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*get_cmd1_path(t_prgm *vars);
 char	*get_cmd2_path(t_prgm *vars);
 void	split_cmd1(t_prgm *vars);
 void	split_cmd2(t_prgm *vars);
+void	split_cmd1_method2(t_prgm *vars);
 
 /* parent_process.c */
 int		parent_process(t_prgm vars, int *fildes, int chi1, int chi2);
@@ -114,5 +115,6 @@ int		parent_process(t_prgm vars, int *fildes, int chi1, int chi2);
 void	free_table(char **table);
 void	free_stuff(t_prgm *vars);
 void	copy_path_to_struct(t_prgm *vars, int n);
+char	*copy_cmd_name_only(char *s);
 
 #endif

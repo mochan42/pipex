@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:47:54 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 19:57:10 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 10:20:10 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,33 @@ void	copy_path_to_struct(t_prgm *vars, int n)
 	}
 	vars->path_file2_short = path_file2_wo_cmd2;
 	free(path_file2_wo_cmd2);
+}
+
+char	*copy_cmd_name_only(char *s)
+{
+	char	*cmd_name;
+	int		len_cmd_name;
+	int		i;
+
+	len_cmd_name = 0;
+	if (!s)
+		return (NULL);
+	while (*s != '\0')
+		s++;
+	while (*s != '/')
+	{
+		len_cmd_name++;
+		s--;
+	}
+	s++;
+	cmd_name = malloc(sizeof(char) * (len_cmd_name + 1));
+	cmd_name[len_cmd_name] = '\0';
+	i = 0;
+	while (*s)
+	{
+		cmd_name[i] = *s;
+		i++;
+		s++;
+	}
+	return (cmd_name);
 }
