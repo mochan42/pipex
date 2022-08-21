@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:53:28 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 17:18:56 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:50:09 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	error_number_of_arguments(t_prgm *vars)
 
 void	check_both_cmds(t_prgm *vars)
 {
-	get_cmd2_path(vars);
+	// get_cmd2_path(vars);
 	if (vars->b_cmd2_nok == 1 && vars->b_cmd1_nok == 1)
 	{
 		ft_printf("command not found: %s\n", vars->cmd1_path);

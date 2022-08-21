@@ -46,8 +46,9 @@ void	error_check_and_preprocessing(t_prgm *vars)
 	str = find_path_in_envp(*vars);
 	split_path(vars, str);
 	init_argv_2_3_into_struct(vars);
-	init_cmd_into_struct(vars);
-	split_cmd2(vars);
+	init_cmd1_into_struct(vars);
+	// split_cmd2(vars);
+	init_cmd2_into_struct(vars);
 	check_both_cmds(vars);
 }
 
