@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 09:35:57 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 12:47:38 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,14 @@ char	*find_path_in_envp(t_prgm vars);
 void	split_path(t_prgm *vars, char *s);
 
 /* get_commands_1.c */
-void	init_cmd_into_struct(t_prgm *vars);
 char	*get_cmd1_path(t_prgm *vars);
-char	*get_cmd2_path(t_prgm *vars);
+void	init_cmd_into_struct(t_prgm *vars);
 void	split_cmd1(t_prgm *vars);
-void	split_cmd2(t_prgm *vars);
 void	split_cmd1_method2(t_prgm *vars);
+
+/* get_commands_2.c */
+void	split_cmd2(t_prgm *vars);
+char	*get_cmd2_path(t_prgm *vars);
 
 /* parent_process.c */
 int		parent_process(t_prgm vars, int *fildes, int chi1, int chi2);
