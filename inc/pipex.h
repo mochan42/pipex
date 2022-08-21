@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 12:47:38 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:57:05 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	split_path(t_prgm *vars, char *s);
 
 /* get_commands_1.c */
 char	*get_cmd1_path(t_prgm *vars);
+void	init_argv_2_3_into_struct(t_prgm *vars);
 void	init_cmd_into_struct(t_prgm *vars);
 void	split_cmd1(t_prgm *vars);
 void	split_cmd1_method2(t_prgm *vars);

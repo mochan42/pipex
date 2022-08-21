@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:46:04 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/20 19:46:27 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:13:07 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	open_file1(t_prgm *vars)
 {
 	vars->path_file1 = vars->argv[1];
-	vars->file1 = open(vars->path_file1, O_RDONLY, 0777);
+	vars->file1 = open(vars->path_file1, O_RDWR, 0777);
 	if (vars->file1 == -1)
 	{
 		vars->b_opening_file1_nok = 1;
@@ -27,7 +27,7 @@ void	open_file1(t_prgm *vars)
 void	open_file2(t_prgm *vars)
 {
 	vars->path_file2 = vars->argv[4];
-	vars->file2 = open(vars->path_file2, O_WRONLY | O_CREAT, 0777);
+	vars->file2 = open(vars->path_file2, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (vars->file2 == -1)
 	{
 		vars->b_opening_file2_nok = 1;
