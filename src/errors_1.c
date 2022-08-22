@@ -14,7 +14,7 @@
 
 void	check_path_file1(t_prgm *vars)
 {
-	if (access(vars->path_file1, F_OK | X_OK) != 0)
+	if (access(vars->path_file1, F_OK | R_OK) != 0)
 		vars->err_file1_path_access_nok = 100;
 	else
 		vars->err_file1_path_access_nok = 0;

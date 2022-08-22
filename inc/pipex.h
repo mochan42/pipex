@@ -6,7 +6,7 @@
 /*   By: mochan <mochan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:08:17 by mochan            #+#    #+#             */
-/*   Updated: 2022/08/21 23:34:04 by mochan           ###   ########.fr       */
+/*   Updated: 2022/08/22 10:14:04 by mochan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
-# include "../get_next_line/get_next_line.h"
 
 /* ########################################################################## */
 /* STRUCTURES */
